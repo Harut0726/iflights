@@ -43,23 +43,6 @@ public class PlanetNode extends Node {
         return res.toString();
     }
 
-    //@Override
-    ArrayList<Node> initChildren2(ArrayList<Planet> planetsArr) {
-        ArrayList<Node> res = new ArrayList<>();
-        int step = getStepByName(this.nameOfPlanet, planetsArr);
-        ArrayList<Integer> times = divideTime(state.getDaysPassed(), step);
-        for(int time: times) {
-            TimeNode timeNode = new TimeNode(
-                    time - state.getDaysPassed(),
-                    this,
-                    new State(time+state.getDaysPassed(), state.getTotalDeltaV()),
-                    level+1
-            );
-            res.add(timeNode);
-        }
-        return res;
-    }
-
     @Override
     ArrayList<Node> initChildren(ArrayList<Planet> planetsArr) {
         ArrayList<Node> res = new ArrayList<>();
@@ -70,7 +53,6 @@ public class PlanetNode extends Node {
 
         for (int k = st+1; k*step <= duration; ++k) {
             int fl_dur = k*step - days_passed;
-
             res.add(new TimeNode(
                         fl_dur,
                         this,
