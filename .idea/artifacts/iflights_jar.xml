@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="iflights:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/iflights_jar</output-path>
+    <root id="archive" name="iflights.jar">
+      <element id="module-output" name="iflights" />
+    </root>
+  </artifact>
+</component>

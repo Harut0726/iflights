@@ -1,0 +1,10 @@
+  {
+    "name": "Voyager 2",
+    "mass": 0,
+    "location_x": 8.562066294346069E-01,
+    "location_y": -5.389742916708254E-01,
+    "velocity_x": 1.241667914011724E-02,
+    "velocity_y": 2.137073991275238E-02,
+    "size": 1,
+    "rotationSpeed": 0.01
+  }
