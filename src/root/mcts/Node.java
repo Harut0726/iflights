@@ -6,11 +6,9 @@ import root.Params;
 import root.moving_model.Planet;
 
 public abstract class Node {
-    //Type type;
     protected State state;
     protected Node parent;
     protected ArrayList<Node> children;
-    //int nActions = 5;
     protected Random rnd = new Random();
     protected double epsilon = 1e-6;
     protected double nVisits, reward;
@@ -74,6 +72,7 @@ public abstract class Node {
         Node cur = this;
         cur.doComputation();
         visited.add(this);
+        
         while (!cur.isLeaf()) {
             cur = cur.select();
             cur.doComputation();
