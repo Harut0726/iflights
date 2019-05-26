@@ -23,7 +23,7 @@ public class MainClass {
 
         Node cur = tree.getRoot();
 
-        int nSimulations = 1000;
+        int nSimulations = 5000;
         System.out.println("Number of simulations: " + nSimulations);
 
         while (!cur.isTerminalNode() && !cur.getState().isTerminal()) {
