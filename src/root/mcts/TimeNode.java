@@ -101,7 +101,7 @@ public class TimeNode extends Node {
 
     private void calcLambertLeg() {
         assert !lambertLegComputed():
-                "Lambert's leg was already computed";
+                "Lambert leg was already computed";
 
         PlanetNode planetNodeFrom = getPlanetNodeFrom();
         PlanetNode planetNodeTo = getPlanetNodeTo();
@@ -144,7 +144,7 @@ public class TimeNode extends Node {
     private double calcDeltaV() {
         assert lambertLegComputed() &&
                 (level==3 || ((TimeNode) parent.parent).lambertLegComputed()):
-                "Can't calculate delta v. Lambert's leg isn't computed";
+                "Can't calculate delta v. Lambert leg isn't computed";
         double res;
         if(level == 3) {
             Vector earthVel = DatabaseUtils.getVectorsByNameAndTime(
