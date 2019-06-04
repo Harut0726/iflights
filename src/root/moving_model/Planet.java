@@ -3,8 +3,6 @@ package root.moving_model;
 import root.Vector;
 import root.Params;
 
-import java.lang.reflect.Array;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Planet extends Mover{
