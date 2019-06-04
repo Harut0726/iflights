@@ -1,6 +1,5 @@
 package root.mcts;
 
-import java.sql.Time;
 import java.util.ArrayList;
 
 import root.Params;
@@ -12,7 +11,10 @@ import root.moving_model.Planet;
 
 public class TimeNode extends Node {
     private int flightDuration;
-    private Vector v1, v2;
+    private Vector v1;
+    private Vector v2;
+
+    private Vector planetVelocity;
 
     public TimeNode(int flightDuration, PlanetNode parent, State state, int level) {
         this.flightDuration = flightDuration;
@@ -46,20 +48,26 @@ public class TimeNode extends Node {
         this.v2 = v2;
     }
 
-    public String toString() {
-        StringBuilder res = new StringBuilder("[duration: ");
-        res.append(flightDuration).
-                append(", reward: ").
-                append(reward).
-                append("], [state: ").
-                append(state).
-                append("] ").
-                append("v1=").
-                append(v1).
-                append( "v2=").
-                append(v2).toString();
+    public Vector getPlanetVelocity() {
+        return planetVelocity;
+    }
 
-        return res.toString();
+    public void setPlanetVelocity(Vector planetVelocity) {
+        this.planetVelocity = planetVelocity;
+    }
+
+    public String toString() {
+        String res = "[duration: " + flightDuration +
+                ", reward: " +
+                reward +
+                "], [state: " +
+                state +
+                "] " +
+                "v1=" +
+                v1 +
+                "v2=" +
+                v2;
+        return res;
     }
 
     @Override
@@ -127,6 +135,7 @@ public class TimeNode extends Node {
 
         v1 = vels[0];
         v2 = vels[1];
+        planetVelocity = vectorsTo[1];
     }
 
     private PlanetNode getPlanetNodeFrom() {
@@ -154,9 +163,13 @@ public class TimeNode extends Node {
             res = Vector.sub(v1, earthVel).mag();
         }
         else {
+            Vector plVel = ((TimeNode) parent.parent).getPlanetVelocity();
             Vector vIn = ((TimeNode) parent.parent).getV2();
             Vector vOut = getV1();
-            res = new VelocityCalculator(vIn, vOut).calcDeltaV();
+            Vector vInRelToPl = Vector.sub(vIn, plVel);
+            Vector vOutRelToPl = Vector.sub(vOut, plVel);
+
+            res = new VelocityCalculator(vInRelToPl, vOutRelToPl).calcDeltaV();
         }
         return res;
     }

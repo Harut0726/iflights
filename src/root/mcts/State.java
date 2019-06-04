@@ -34,14 +34,13 @@ public class State {
     }
 
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append("daysPassed: " + daysPassed + ", ");
-        res.append("totV: " + totalDeltaV);
-        return res.toString();
+        String res = "daysPassed: " + daysPassed + ", " +
+                "totV: " + totalDeltaV;
+        return res;
     }
 
     public boolean isTerminal() {
-        int maxDuration = Params.Mission_Params.MISSION_DURATION;
+        int maxDuration = Params.Mission_Params.MAX_MISSION_DURATION;
         if(daysPassed > maxDuration) {
             return true;
         }

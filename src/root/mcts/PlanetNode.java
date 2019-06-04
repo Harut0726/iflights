@@ -3,8 +3,6 @@ package root.mcts;
 import java.util.ArrayList;
 
 import root.Params;
-import root.Vector;
-import root.db.DatabaseUtils;
 import root.moving_model.Planet;
 
 
@@ -31,16 +29,14 @@ public class PlanetNode extends Node {
     }
 
     public String toString() {
-        StringBuilder res = new StringBuilder("[name: ");
-        res.append(nameOfPlanet).append("], ").
-                append("[visits: ").
-                append(nVisits).
-                append(", reward: ").
-                append(reward).append("], [state: ").
-                append(state).
-                append("]");
-
-        return res.toString();
+        String res = "[name: " + nameOfPlanet + "], " +
+                "[visits: " +
+                nVisits +
+                ", reward: " +
+                reward + "], [state: " +
+                state +
+                "]";
+        return res;
     }
 
     //@Override
@@ -65,7 +61,7 @@ public class PlanetNode extends Node {
         ArrayList<Node> res = new ArrayList<>();
         int step = getStepByName(nameOfPlanet, planetsArr);
         int days_passed = state.getDaysPassed();
-        int duration = Params.Mission_Params.MISSION_DURATION;
+        int duration = Params.Mission_Params.MAX_MISSION_DURATION;
         int st = days_passed / step;
 
         for (int k = st+1; k*step <= duration; ++k) {
@@ -90,7 +86,7 @@ public class PlanetNode extends Node {
 
     private ArrayList<Integer> divideTime(int daysPassed, int step) {
         ArrayList<Integer> res = new ArrayList<>();
-        int duration = Params.Mission_Params.MISSION_DURATION;
+        int duration = Params.Mission_Params.MAX_MISSION_DURATION;
 
         for(int days=step; days < duration; days += step) {
             if(days > daysPassed) {

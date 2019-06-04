@@ -55,83 +55,59 @@ public class ImpulseTests {
         double deltaV1 = Vector.sub(vels1[0], earth.v).mag();
 
         Vector[] vels2 = getVels(jupiter, saturn);
+        vels1[1].sub(jupiter.v);
+        vels2[0].sub(jupiter.v);
         double deltaV2 = (new VelocityCalculator(vels1[1], vels2[0])).calcDeltaV();
 
         Vector[] vels3 = getVels(saturn, uranus);
+        vels2[1].sub(saturn.v);
+        vels3[0].sub(saturn.v);
         double deltaV3 = (new VelocityCalculator(vels2[1], vels3[0])).calcDeltaV();
 
         Vector[] vels4 = getVels(uranus, neptune);
+        vels3[1].sub(uranus.v);
+        vels4[0].sub(uranus.v);
         double deltaV4 = (new VelocityCalculator(vels3[1], vels4[0])).calcDeltaV();
 
         double eps = 0.0001;
         double totDeltaV = deltaV1 + deltaV2 + deltaV3 + deltaV4;
-        assertTrue(Math.abs(convertToKmPerSec(totDeltaV) - 18.020777355575078) < eps);
+        totDeltaV = convertToKmPerSec(totDeltaV);
+        assertTrue(Math.abs(totDeltaV - 9.926259089029163) < eps);
     }
 
     @org.junit.Test
     public void EarthMarsNeptuneImpulse() {
-        //20000 simulations
+        //50000 simulations
         //Earth-Mars: 207 days
-        //Mars-Neptune: 1868 days
+        //Mars-Neptune: 4180 days
         Encounter
                 earth = new Encounter(
-                    new Vector(8.561576983560533E-01, -5.389692490908495E-01),
-                    new Vector(8.881530388789968E-03, 1.450102105675779E-02),
-                    "1977-08-20"
-                ),
+                new Vector(8.561576983560533E-01, -5.389692490908495E-01),
+                new Vector(8.881530388789968E-03, 1.450102105675779E-02),
+                "1977-08-20"
+        ),
                 mars = new Encounter(
-                    new Vector(-1.368632146483583E+00, 9.433966000622935E-01),
-                    new Vector(-7.412293789087874E-03, -1.032934357050779E-02),
-                    "1978-03-15"
+                        new Vector(-1.368632146483583E+00, 9.433966000622935E-01),
+                        new Vector(-7.412293789087874E-03, -1.032934357050779E-02),
+                        "1978-03-15"
                 ),
                 neptune = new Encounter(
-                        new Vector(-1.177156966313602E+00 , -3.023837169687858E+01),
-                        new Vector(3.123607151165214E-03, -1.088682704396559E-04),
-                        "1983-04-26"
+                        new Vector(5.999621390193559E+00, -2.960814343253063E+01),
+                        new Vector(3.051416457593553E-03, 6.422718862963416E-04),
+                        "1989-08-24"
                 );
 
         Vector[] vels1 = getVels(earth, mars);
         double deltaV1 = Vector.sub(vels1[0], earth.v).mag();
 
         Vector[] vels2 = getVels(mars, neptune);
-        System.out.println(vels2[0]);
+        vels1[1].sub(mars.v);
+        vels2[0].sub(mars.v);
         double deltaV2 = (new VelocityCalculator(vels1[1], vels2[0])).calcDeltaV();
 
         double eps = 0.0001;
         double totDeltaV = deltaV1 + deltaV2;
-        assertTrue(Math.abs(totDeltaV - 0.00967634) < eps);
-    }
-
-    @org.junit.Test
-    public void EarthJupiterNeptuneImpulse() {
-        //10000 simulations
-        //Earth-Jupiter: 745 days
-        //Jupiter-Neptune: 1330 days
-        Encounter
-                earth = new Encounter(
-                            new Vector(8.561576983560533E-01, -5.389692490908495E-01),
-                            new Vector(8.881530388789968E-03, 1.450102105675779E-02),
-                            "1977-08-20"
-        ),
-                jupiter = new Encounter(
-                            new Vector(-4.21950483322144, 3.28921985626221),
-                            new Vector(-0.00473734131082892, -0.00559987267479301),
-                            "1979-09-04"
-                ),
-                neptune = new Encounter(
-                            new Vector(-1.1925196647644, -30.2252597808838),
-                            new Vector(0.00310847908258438, -0.000103903759736568),
-                        "1983-04-26"
-                );
-
-        Vector[] vels1 = getVels(earth, jupiter);
-        double deltaV1 = Vector.sub(vels1[0], earth.v).mag();
-
-        Vector[] vels2 = getVels(jupiter, neptune);
-        double deltaV2 = (new VelocityCalculator(vels1[1], vels2[0])).calcDeltaV();
-
-        double eps = 0.0001;
-        double totDeltaV = deltaV1 + deltaV2;
-        assertTrue(Math.abs(totDeltaV - 0.01358079) < eps);
+        totDeltaV = convertToKmPerSec(totDeltaV);
+        assertTrue(Math.abs(totDeltaV - 9.582773686944007) < eps);
     }
 }

@@ -1,9 +1,6 @@
 package root;
 
 import root.db.DatabaseUtils;
-import root.lambert.VoyagerImpulseCalculator;
-import root.mcts.PlanetNode;
-import root.mcts.State;
 import root.mcts.Node;
 import root.mcts.Tree;
 import root.moving_model.ModelLoader;
@@ -23,7 +20,7 @@ public class MainClass {
 
         Node cur = tree.getRoot();
 
-        int nSimulations = 1000;
+        int nSimulations = 50000;
         System.out.println("Number of simulations: " + nSimulations);
 
         while (!cur.isTerminalNode() && !cur.getState().isTerminal()) {

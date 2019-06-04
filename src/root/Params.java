@@ -5,8 +5,8 @@ public class Params {
     public static class Mission_Params {
         public static final String START_DATE = "1977-08-20"; //15:33 {hh:mm}
         public static final String NAME_OF_LAST_PLANET = "Neptune";
-        public static final int MISSION_DURATION = 4387; //1977-08-20 – 1989-08-24"
-        public static final double MAX_DELTA_V = 0.010407869798639627;
+        public static final int MAX_MISSION_DURATION = 4387; //1977-08-20 – 1989-08-24"
+        public static final double MAX_DELTA_V = 0.005732894322353824;
     }
 
     //Physical parameters
